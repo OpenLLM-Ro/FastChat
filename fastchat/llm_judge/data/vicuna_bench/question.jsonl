@@ -1,80 +1,80 @@
-{"question_id": 1, "category": "generic", "turns": ["How can I improve my time management skills?"]}
-{"question_id": 2, "category": "generic", "turns": ["What are the most effective ways to deal with stress?"]}
-{"question_id": 3, "category": "generic", "turns": ["What are the main differences between Python and JavaScript programming languages?"]}
-{"question_id": 4, "category": "generic", "turns": ["How can I increase my productivity while working from home?"]}
-{"question_id": 5, "category": "generic", "turns": ["Can you explain the basics of quantum computing?"]}
-{"question_id": 6, "category": "generic", "turns": ["What are the differences between plant-based and animal-based protein sources?"]}
-{"question_id": 7, "category": "generic", "turns": ["How can I develop my critical thinking skills?"]}
-{"question_id": 8, "category": "generic", "turns": ["What are the major challenges faced by the education sector today?"]}
-{"question_id": 9, "category": "generic", "turns": ["What are the primary factors that influence consumer behavior?"]}
-{"question_id": 10, "category": "generic", "turns": ["What are the most effective strategies for conflict resolution in the workplace?"]}
-{"question_id": 11, "category": "knowledge", "turns": ["What are some potential implications of using a single-use plastic bottle versus a reusable bottle on both the environment and human health?"]}
-{"question_id": 12, "category": "knowledge", "turns": ["What factors would you consider when designing an inclusive and accessible public transportation system?"]}
-{"question_id": 13, "category": "knowledge", "turns": ["How can governments utilize fiscal and monetary policies to combat economic recessions?"]}
-{"question_id": 14, "category": "knowledge", "turns": ["How do language and cultural barriers affect the way people communicate and form relationships in multicultural societies?"]}
-{"question_id": 15, "category": "knowledge", "turns": ["Describe a scenario where artificial intelligence could be used to improve the quality and efficiency of healthcare delivery."]}
-{"question_id": 16, "category": "knowledge", "turns": ["Explain the process of gene editing using CRISPR-Cas9 technology, and discuss its potential applications and ethical implications."]}
-{"question_id": 17, "category": "knowledge", "turns": ["How do vaccinations work to protect individuals and communities from infectious diseases, and what is herd immunity?"]}
-{"question_id": 18, "category": "knowledge", "turns": ["How do social media platforms influence the way people consume and share news, and what are the potential implications for the spread of misinformation?"]}
-{"question_id": 19, "category": "knowledge", "turns": ["How do cultural, social, and economic factors influence people's food choices, and how can this knowledge be used to promote healthier diets?"]}
-{"question_id": 20, "category": "knowledge", "turns": ["Explain the process of natural selection and how it contributes to the evolution and adaptation of species."]}
-{"question_id": 21, "category": "roleplay", "turns": ["How would you introduce yourself as a medieval knight at a royal banquet?"]}
-{"question_id": 22, "category": "roleplay", "turns": ["As a pirate captain, what would you say to your crew to motivate them to search for hidden treasure?"]}
-{"question_id": 23, "category": "roleplay", "turns": ["If you were a Shakespearean character, how would you declare your love for someone in a soliloquy?"]}
-{"question_id": 24, "category": "roleplay", "turns": ["As a superhero, how would you explain your origin story to a curious child?"]}
-{"question_id": 25, "category": "roleplay", "turns": ["Imagine you are a time traveler from the year 3000. What technological advancements would you tell people about?"]}
-{"question_id": 26, "category": "roleplay", "turns": ["As a sports commentator, describe the winning play in the final seconds of a championship game."]}
-{"question_id": 27, "category": "roleplay", "turns": ["Pretend to be a world-famous chef. How would you describe your signature dish to a panel of judges?"]}
-{"question_id": 28, "category": "roleplay", "turns": ["You are a mountain climber reaching the summit of Mount Everest. Describe your emotions and the view from the top."]}
-{"question_id": 29, "category": "roleplay", "turns": ["As a space colonist on Mars, describe your daily life and the challenges you face living on another planet."]}
-{"question_id": 30, "category": "roleplay", "turns": ["Pretend to be a character in a post-apocalyptic world. Describe how you survive and the allies you encounter."]}
-{"question_id": 31, "category": "common-sense", "turns": ["How can you determine if a restaurant is popular among locals or mainly attracts tourists, and why might this information be useful?"]}
-{"question_id": 32, "category": "common-sense", "turns": ["What are some subtle clues that suggest someone is pretending to understand a topic or conversation when they are actually confused or uninformed?"]}
-{"question_id": 33, "category": "common-sense", "turns": ["Why might someone choose to use a paper map or ask for directions instead of relying on a GPS device or smartphone app?"]}
-{"question_id": 34, "category": "common-sense", "turns": ["How can you determine if a person is genuinely interested in a conversation or simply being polite?"]}
-{"question_id": 35, "category": "common-sense", "turns": ["Why might someone prefer to shop at a small, locally-owned business instead of a large chain store, even if the prices are higher?"]}
-{"question_id": 36, "category": "common-sense", "turns": ["How can you assess the credibility of a source of information, such as a news article or blog post, without relying solely on the reputation of the author or publisher?"]}
-{"question_id": 37, "category": "common-sense", "turns": ["Why do some people enjoy the sensation of being scared, such as by watching horror movies or going on roller coasters, while others avoid these experiences?"]}
-{"question_id": 38, "category": "common-sense", "turns": ["How can observing the behavior of other people in a social situation provide clues about cultural norms and expectations?"]}
-{"question_id": 39, "category": "common-sense", "turns": ["Do we have a moral obligation to explore space, or should we focus on solving Earth's problems first?"]}
-{"question_id": 40, "category": "common-sense", "turns": ["In a world where automation is becoming increasingly prevalent, is it more important to prioritize job creation or technological progress?"]}
-{"question_id": 41, "category": "fermi", "turns": ["How many times does the average human blink in a lifetime? Try to explain your answer. Your explanation should take the reader through your reasoning step-by-step."]}
-{"question_id": 42, "category": "fermi", "turns": ["How many atoms are in a grain of salt? Try to explain your answer. Your explanation should take the reader through your reasoning step-by-step."]}
-{"question_id": 43, "category": "fermi", "turns": ["How many lightning strikes occur on Earth each day? Try to explain your answer. Your explanation should take the reader through your reasoning step-by-step."]}
-{"question_id": 44, "category": "fermi", "turns": ["How many balloons would it take to lift a house like in the movie \"Up\"? Try to explain your answer. Your explanation should take the reader through your reasoning step-by-step."]}
-{"question_id": 45, "category": "fermi", "turns": ["How many text messages are sent globally in a minute? Try to explain your answer. Your explanation should take the reader through your reasoning step-by-step."]}
-{"question_id": 46, "category": "fermi", "turns": ["How many words are spoken daily on Earth? Try to explain your answer. Your explanation should take the reader through your reasoning step-by-step."]}
-{"question_id": 47, "category": "fermi", "turns": ["How many snowflakes fall during a typical winter? Try to explain your answer. Your explanation should take the reader through your reasoning step-by-step."]}
-{"question_id": 48, "category": "fermi", "turns": ["How many pages are in all the books ever written? Try to explain your answer. Your explanation should take the reader through your reasoning step-by-step."]}
-{"question_id": 49, "category": "fermi", "turns": ["How many times has the Earth orbited the Sun since the beginning of life? Try to explain your answer. Your explanation should take the reader through your reasoning step-by-step."]}
-{"question_id": 50, "category": "fermi", "turns": ["How many songs have been recorded throughout history? Try to explain your answer. Your explanation should take the reader through your reasoning step-by-step."]}
-{"question_id": 51, "category": "counterfactual", "turns": ["What if the Internet had been invented during the Renaissance period?"]}
-{"question_id": 52, "category": "counterfactual", "turns": ["What if the Aztecs had successfully repelled the Spanish conquistadors?"]}
-{"question_id": 53, "category": "counterfactual", "turns": ["What if the Black Death had not occurred in the 14th century?"]}
-{"question_id": 54, "category": "counterfactual", "turns": ["What if Isaac Newton had focused on biology instead of physics?"]}
-{"question_id": 55, "category": "counterfactual", "turns": ["What if the Beatles had never formed as a band?"]}
-{"question_id": 56, "category": "counterfactual", "turns": ["What if Alan Turing had not cracked the Enigma code during World War II?"]}
-{"question_id": 57, "category": "counterfactual", "turns": ["What if the Suez Canal had never been constructed?"]}
-{"question_id": 58, "category": "counterfactual", "turns": ["What if the Maya civilization had never mysteriously collapsed?"]}
-{"question_id": 59, "category": "counterfactual", "turns": ["What if Christopher Columbus had not discovered the Americas?"]}
-{"question_id": 60, "category": "counterfactual", "turns": ["What if Vincent van Gogh had been a successful artist during his lifetime?"]}
-{"question_id": 61, "category": "coding", "turns": ["Develop a C++ program that reads a text file line by line and counts the number of occurrences of a specific word in the file."]}
-{"question_id": 62, "category": "coding", "turns": ["Implement a Python function to find the longest common subsequence of two input strings using dynamic programming."]}
-{"question_id": 63, "category": "coding", "turns": ["Implement a regular expression in Python to validate an email address."]}
-{"question_id": 64, "category": "coding", "turns": ["Write a program to find the nth Fibonacci number using dynamic programming."]}
-{"question_id": 65, "category": "coding", "turns": ["Implement a binary search algorithm to find a specific element in a sorted array."]}
-{"question_id": 66, "category": "coding", "turns": ["Implement a queue data structure using two stacks in Python."]}
-{"question_id": 67, "category": "coding", "turns": ["Implement a program to find the common elements in two arrays without using any extra data structures."]}
-{"question_id": 68, "category": "math", "turns": ["Given that f(x) = 5x^3 - 2x + 3, find the value of f(2)."]}
-{"question_id": 69, "category": "math", "turns": ["Solve for x in the equation 3x + 10 = 5(x - 2)."]}
-{"question_id": 70, "category": "math", "turns": ["If the endpoints of a line segment are (2, -2) and (10, 4), what is the length of the segment?"]}
-{"question_id": 71, "category": "writing", "turns": ["Can you help me write a formal email to a potential business partner proposing a joint venture?"]}
-{"question_id": 72, "category": "writing", "turns": ["Can you help me write a resignation letter to my current employer, while leaving on good terms and expressing gratitude for the opportunities provided?"]}
-{"question_id": 73, "category": "writing", "turns": ["Use an appropriate format to structure a formal letter of recommendation for a student applying to a prestigious graduate program in computer science."]}
-{"question_id": 74, "category": "writing", "turns": ["Write a compelling product launch announcement email to inform our customers of our new software solution."]}
-{"question_id": 75, "category": "writing", "turns": ["Draft an apology email to a customer who experienced a delay in their order, and provide reassurance that the issue has been resolved."]}
-{"question_id": 76, "category": "writing", "turns": ["Write a script for a YouTube video exploring the history and cultural significance of jazz."]}
-{"question_id": 77, "category": "writing", "turns": ["Compose an engaging travel blog post about a recent trip to Hawaii, highlighting cultural experiences and must-see attractions."]}
-{"question_id": 78, "category": "writing", "turns": ["Write a captivating movie review for a recently released science fiction film, discussing its plot, characters, and special effects."]}
-{"question_id": 79, "category": "writing", "turns": ["Structure a podcast script for an episode discussing the influence of streaming platforms on the music industry."]}
-{"question_id": 80, "category": "writing", "turns": ["Write a symphony concert review, discussing the orchestra's performance and overall audience experience."]}
+{"question_id": 1, "category": "generic", "turns": ["Cum îmi pot îmbunătăți abilitățile de gestionare a timpului?"]}
+{"question_id": 2, "category": "generic", "turns": ["Care sunt cele mai eficiente metode de a face față stresului?"]}
+{"question_id": 3, "category": "generic", "turns": ["Care sunt principalele diferențe dintre limbajele de programare Python și JavaScript?"]}
+{"question_id": 4, "category": "generic", "turns": ["Cum îmi pot crește productivitatea în timp ce lucrez de acasă?"]}
+{"question_id": 5, "category": "generic", "turns": ["Puteți explica elementele de bază ale calculului cuantic?"]}
+{"question_id": 6, "category": "generic", "turns": ["Care sunt diferențele dintre sursele de proteine ​​de origine vegetală și cele de origine animală?"]}
+{"question_id": 7, "category": "generic", "turns": ["Cum îmi pot dezvolta abilitățile de gândire critică?"]}
+{"question_id": 8, "category": "generic", "turns": ["Care sunt provocările majore cu care se confruntă astăzi sectorul educațional?"]}
+{"question_id": 9, "category": "generic", "turns": ["Care sunt factorii principali care influențează comportamentul consumatorului?"]}
+{"question_id": 10, "category": "generic", "turns": ["Care sunt cele mai eficiente strategii de rezolvare a conflictelor la locul de muncă?"]}
+{"question_id": 11, "category": "knowledge", "turns": ["Care sunt unele implicații potențiale ale utilizării unei sticle de plastic de unică folosință față de o sticlă reutilizabilă atât asupra mediului, cât și asupra sănătății umane?"]}
+{"question_id": 12, "category": "knowledge", "turns": ["Ce factori ați lua în considerare atunci când proiectați un sistem de transport public incluziv și accesibil?"]}
+{"question_id": 13, "category": "knowledge", "turns": ["Cum pot guvernele să utilizeze politicile fiscale și monetare pentru a combate recesiunile economice?"]}
+{"question_id": 14, "category": "knowledge", "turns": ["Cum afectează barierele lingvistice și culturale modul în care oamenii comunică și formează relații în societățile multiculturale?"]}
+{"question_id": 15, "category": "knowledge", "turns": ["Descrieți un scenariu în care inteligența artificială ar putea fi utilizată pentru a îmbunătăți calitatea și eficiența furnizării asistenței medicale."]}
+{"question_id": 16, "category": "knowledge", "turns": ["Explicați procesul de editare a genelor folosind tehnologia CRISPR-Cas9 și discutați aplicațiile și implicațiile etice potențiale ale acestuia."]}
+{"question_id": 17, "category": "knowledge", "turns": ["Cum funcționează vaccinările pentru a proteja indivizii și comunitățile de boli infecțioase și ce este imunitatea de turmă?"]}
+{"question_id": 18, "category": "knowledge", "turns": ["Cum influențează platformele de social media modul în care oamenii consumă și distribuie știri și care sunt potențialele implicații pentru răspândirea dezinformării?"]}
+{"question_id": 19, "category": "knowledge", "turns": ["Cum influențează factorii culturali, sociali și economici alegerile alimentare ale oamenilor și cum pot fi utilizate aceste cunoștințe pentru a promova diete mai sănătoase?"]}
+{"question_id": 20, "category": "knowledge", "turns": ["Explicați procesul selecției naturale și modul în care acesta contribuie la evoluția și adaptarea speciilor."]}
+{"question_id": 21, "category": "roleplay", "turns": ["Cum te-ai prezenta ca un cavaler medieval la un banchet regal?"]}
+{"question_id": 22, "category": "roleplay", "turns": ["Ca căpitan de pirat, ce i-ai spune echipajului tău pentru a-l motiva să caute comori ascunse?"]}
+{"question_id": 23, "category": "roleplay", "turns": ["Dacă ai fi un personaj shakespearian, cum ți-ai declara dragostea pentru cineva într-un solilocv?"]}
+{"question_id": 24, "category": "roleplay", "turns": ["Ca super-erou, cum ai explica povestea ta originii unui copil curios?"]}
+{"question_id": 25, "category": "roleplay", "turns": ["Imaginează-ți că ești un călător în timp din anul 3000. Despre ce progrese tehnologice le-ai spune oamenilor?"]}
+{"question_id": 26, "category": "roleplay", "turns": ["În calitate de comentator sportiv, descrie jocul câștigător în ultimele secunde ale unui joc de campionat."]}
+{"question_id": 27, "category": "roleplay", "turns": ["Prefă-te că ești un bucătar de renume mondial. Cum ați descrie platoul dvs. de semnătură unui juriu?"]}
+{"question_id": 28, "category": "roleplay", "turns": ["Ești un alpinist care ajunge pe vârful Muntelui Everest. Descrieți-vă emoțiile și priveliștea de sus."]}
+{"question_id": 29, "category": "roleplay", "turns": ["În calitate de colonist spațial pe Marte, descrie-ți viața de zi cu zi și provocările cu care te confrunți trăind pe o altă planetă."]}
+{"question_id": 30, "category": "roleplay", "turns": ["Prefă-te că ești un personaj într-o lume post-apocaliptică. Descrieți cum supraviețuiți și aliații pe care îi întâlniți."]}
+{"question_id": 31, "category": "common-sense", "turns": ["Cum puteți determina dacă un restaurant este popular printre localnici sau atrage în principal turiști și de ce ar putea fi utile aceste informații?"]}
+{"question_id": 32, "category": "common-sense", "turns": ["Care sunt câteva indicii subtile care sugerează că cineva pretinde că înțelege un subiect sau o conversație atunci când este de fapt confuz sau neinformat?"]}
+{"question_id": 33, "category": "common-sense", "turns": ["De ce ar putea cineva să aleagă să folosească o hartă de hârtie sau să ceară indicații de orientare în loc să se bazeze pe un dispozitiv GPS sau pe o aplicație pentru smartphone?"]}
+{"question_id": 34, "category": "common-sense", "turns": ["Cum poți determina dacă o persoană este cu adevărat interesată de o conversație sau pur și simplu este politicoasă?"]}
+{"question_id": 35, "category": "common-sense", "turns": ["De ce ar putea cineva prefera să facă cumpărături la o afacere mică, deținută local, în loc de un mare lanț de magazine, chiar dacă prețurile sunt mai mari?"]}
+{"question_id": 36, "category": "common-sense", "turns": ["Cum poți evalua credibilitatea unei surse de informații, cum ar fi un articol de știri sau o postare pe blog, fără a te baza doar pe reputația autorului sau a editorului?"]}
+{"question_id": 37, "category": "common-sense", "turns": ["De ce unii oameni se bucură de senzația de frică, cum ar fi vizionarea de filme de groază sau mergând pe roller coasters, în timp ce alții evită aceste experiențe?"]}
+{"question_id": 38, "category": "common-sense", "turns": ["Cum poate observarea comportamentului altor persoane într-o situație socială să ofere indicii despre normele și așteptările culturale?"]}
+{"question_id": 39, "category": "common-sense", "turns": ["Avem obligația morală de a explora spațiul sau ar trebui să ne concentrăm mai întâi pe rezolvarea problemelor Pământului?"]}
+{"question_id": 40, "category": "common-sense", "turns": ["Într-o lume în care automatizarea devine din ce în ce mai răspândită, este mai important să se prioritizeze crearea de locuri de muncă sau progresul tehnologic?"]}
+{"question_id": 41, "category": "fermi", "turns": ["De câte ori clipește omul mediu într-o viață? Încercați să vă explicați răspunsul. Explicația ta ar trebui să conducă cititorul prin raționamentul tău pas cu pas."]}
+{"question_id": 42, "category": "fermi", "turns": ["Câți atomi sunt într-un grăunte de sare? Încercați să vă explicați răspunsul. Explicația ta ar trebui să conducă cititorul prin raționamentul tău pas cu pas."]}
+{"question_id": 43, "category": "fermi", "turns": ["Câte fulgere au loc pe Pământ în fiecare zi? Încercați să vă explicați răspunsul. Explicația ta ar trebui să conducă cititorul prin raționamentul tău pas cu pas."]}
+{"question_id": 44, "category": "fermi", "turns": ["De câte baloane ar fi nevoie pentru a ridica o casă ca în filmul „Up”? Încercați să vă explicați răspunsul. Explicația ta ar trebui să conducă cititorul prin raționamentul tău pas cu pas."]}
+{"question_id": 45, "category": "fermi", "turns": ["Câte mesaje text sunt trimise la nivel global într-un minut? Încercați să vă explicați răspunsul. Explicația ta ar trebui să conducă cititorul prin raționamentul tău pas cu pas."]}
+{"question_id": 46, "category": "fermi", "turns": ["Câte cuvinte se rostesc zilnic pe Pământ? Încercați să vă explicați răspunsul. Explicația ta ar trebui să conducă cititorul prin raționamentul tău pas cu pas."]}
+{"question_id": 47, "category": "fermi", "turns": ["Câți fulgi de zăpadă cad într-o iarnă tipică? Încercați să vă explicați răspunsul. Explicația ta ar trebui să conducă cititorul prin raționamentul tău pas cu pas."]}
+{"question_id": 48, "category": "fermi", "turns": ["Câte pagini sunt în toate cărțile scrise vreodată? Încercați să vă explicați răspunsul. Explicația ta ar trebui să conducă cititorul prin raționamentul tău pas cu pas."]}
+{"question_id": 49, "category": "fermi", "turns": ["De câte ori a orbit Pământul în jurul Soarelui de la începutul vieții? Încercați să vă explicați răspunsul. Explicația ta ar trebui să conducă cititorul prin raționamentul tău pas cu pas."]}
+{"question_id": 50, "category": "fermi", "turns": ["Câte cântece au fost înregistrate de-a lungul istoriei? Încercați să vă explicați răspunsul. Explicația ta ar trebui să conducă cititorul prin raționamentul tău pas cu pas."]}
+{"question_id": 51, "category": "counterfactual", "turns": ["Dar dacă internetul ar fi fost inventat în perioada Renașterii?"]}
+{"question_id": 52, "category": "counterfactual", "turns": ["Dar dacă aztecii i-ar fi respins cu succes pe conchistadorii spanioli?"]}
+{"question_id": 53, "category": "counterfactual", "turns": ["Dar dacă Moartea Neagră nu ar fi avut loc în secolul al XIV-lea?"]}
+{"question_id": 54, "category": "counterfactual", "turns": ["Dacă Isaac Newton s-ar fi concentrat pe biologie în loc de fizică?"]}
+{"question_id": 55, "category": "counterfactual", "turns": ["Dar dacă Beatles nu s-ar fi format niciodată ca trupă?"]}
+{"question_id": 56, "category": "counterfactual", "turns": ["Dacă Alan Turing nu ar fi spart codul Enigma în timpul celui de-al Doilea Război Mondial?"]}
+{"question_id": 57, "category": "counterfactual", "turns": ["Și dacă Canalul Suez nu ar fi fost niciodată construit?"]}
+{"question_id": 58, "category": "counterfactual", "turns": ["Dar dacă civilizația Maya nu s-ar fi prăbușit niciodată în mod misterios?"]}
+{"question_id": 59, "category": "counterfactual", "turns": ["Dacă Cristofor Columb nu ar fi descoperit America?"]}
+{"question_id": 60, "category": "counterfactual", "turns": ["Dar dacă Vincent van Gogh ar fi fost un artist de succes în timpul vieții sale?"]}
+{"question_id": 61, "category": "coding", "turns": ["Dezvoltați un program C++ care citește un fișier text linie cu linie și numără numărul de apariții ale unui anumit cuvânt din fișier."]}
+{"question_id": 62, "category": "coding", "turns": ["Implementați o funcție Python pentru a găsi cea mai lungă subsecvență comună a două șiruri de caractere de intrare folosind programarea dinamică."]}
+{"question_id": 63, "category": "coding", "turns": ["Implementați o expresie regulată în Python pentru a valida o adresă de e-mail."]}
+{"question_id": 64, "category": "coding", "turns": ["Scrieți un program pentru a găsi al n-lea număr Fibonacci folosind programarea dinamică."]}
+{"question_id": 65, "category": "coding", "turns": ["Implementați un algoritm de căutare binar pentru a găsi un anumit element într-o matrice sortată."]}
+{"question_id": 66, "category": "coding", "turns": ["Implementați o structură de date de coadă folosind două stive în Python."]}
+{"question_id": 67, "category": "coding", "turns": ["Implementați un program pentru a găsi elementele comune în două matrice fără a utiliza structuri de date suplimentare."]}
+{"question_id": 68, "category": "math", "turns": ["Având în vedere că f(x) = 5x^3 - 2x + 3, găsiți valoarea lui f(2)."]}
+{"question_id": 69, "category": "math", "turns": ["Rezolvați pentru x în ecuația 3x + 10 = 5(x - 2)."]}
+{"question_id": 70, "category": "math", "turns": ["Dacă punctele de capăt ale unui segment de linie sunt (2, -2) și (10, 4), care este lungimea segmentului?"]}
+{"question_id": 71, "category": "writing", "turns": ["Mă puteți ajuta să scriu un e-mail oficial unui potențial partener de afaceri care propune o societate în comun?"]}
+{"question_id": 72, "category": "writing", "turns": ["Mă puteți ajuta să scriu o scrisoare de demisie actualului meu angajator, plecând în condiții bune și exprimând recunoștință pentru oportunitățile oferite?"]}
+{"question_id": 73, "category": "writing", "turns": ["Utilizați un format adecvat pentru a structura o scrisoare formală de recomandare pentru un student care aplică la un program de absolvire prestigios în informatică."]}
+{"question_id": 74, "category": "writing", "turns": ["Scrieți un e-mail convingător de anunț de lansare a produsului pentru a informa clienții noștri despre noua noastră soluție software."]}
+{"question_id": 75, "category": "writing", "turns": ["Scrieți un e-mail de scuze către un client care a întârziat comanda și asigurați-vă că problema a fost rezolvată."]}
+{"question_id": 76, "category": "writing", "turns": ["Scrieți un scenariu pentru un videoclip YouTube care explorează istoria și semnificația culturală a jazz-ului."]}
+{"question_id": 77, "category": "writing", "turns": ["Compune o postare captivantă pe blogul de călătorie despre o excursie recentă în Hawaii, evidențiind experiențele culturale și atracțiile de neapărat."]}
+{"question_id": 78, "category": "writing", "turns": ["Scrieți o recenzie captivantă a unui film științifico-fantastic recent lansat, discutând despre intriga, personajele și efectele speciale ale acestuia."]}
+{"question_id": 79, "category": "writing", "turns": ["Structurați un script podcast pentru un episod care discută influența platformelor de streaming asupra industriei muzicale."]}
+{"question_id": 80, "category": "writing", "turns": ["Scrieți o recenzie a unui concert simfonic, discutând despre performanța orchestrei și despre experiența generală a publicului."]}
