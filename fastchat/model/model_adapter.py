@@ -1522,6 +1522,22 @@ class Llama2Adapter(BaseModelAdapter):
         return get_conv_template("llama-2")
 
 
+class LlamaFoundationAdapter(BaseModelAdapter):
+    """The model adapter for Llama-2 Foundation (e.g., meta-llama/Llama-2-7b-hf)"""
+
+    def match(self, model_path: str):
+        return "llama-foundation" in model_path.lower()
+
+    def load_model(self, model_path: str, from_pretrained_kwargs: dict):
+        model, tokenizer = super().load_model(model_path, from_pretrained_kwargs)
+        model.config.eos_token_id = tokenizer.eos_token_id
+        model.config.pad_token_id = tokenizer.pad_token_id
+        return model, tokenizer
+
+    def get_default_conv_template(self, model_path: str) -> Conversation:
+        return get_conv_template("raw")
+
+
 class CuteGPTAdapter(BaseModelAdapter):
     """The model adapter for CuteGPT"""
 
@@ -2307,6 +2323,7 @@ register_model_adapter(PythiaAdapter)
 register_model_adapter(InternLMChatAdapter)
 register_model_adapter(StarChatAdapter)
 register_model_adapter(Llama2Adapter)
+register_model_adapter(LlamaFoundationAdapter)
 register_model_adapter(CuteGPTAdapter)
 register_model_adapter(OpenOrcaAdapter)
 register_model_adapter(DolphinAdapter)

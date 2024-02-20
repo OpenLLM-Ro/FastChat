@@ -95,6 +95,9 @@ def get_model_answers(
         debug=False,
     )
 
+    # additional configuration
+    model.config.pad_token_id = tokenizer.pad_token_id
+
     for question in tqdm(questions):
         if question["category"] in temperature_config:
             temperature = temperature_config[question["category"]]
@@ -187,7 +190,7 @@ def get_model_answers(
                 "choices": choices,
                 "tstamp": time.time(),
             }
-            fout.write(json.dumps(ans_json) + "\n")
+            fout.write(json.dumps(ans_json, ensure_ascii=False) + "\n")
 
 
 def reorg_answer_file(answer_file):
