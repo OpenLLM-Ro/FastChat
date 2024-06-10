@@ -10,6 +10,7 @@ import logging.handlers
 import os
 import platform
 import sys
+import time
 from typing import AsyncGenerator, Generator
 import warnings
 
@@ -148,7 +149,7 @@ def get_gpu_memory(max_gpus=None):
     return gpu_memory
 
 
-def oai_moderation(text):
+def oai_moderation(text, custom_thresholds=None):
     """
     Check whether the text violates OpenAI moderation API.
     """
@@ -156,32 +157,41 @@ def oai_moderation(text):
 
     client = openai.OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
-    threshold_dict = {
-        "sexual": 0.2,
-    }
+    # default to true to be conservative
+    flagged = True
     MAX_RETRY = 3
     for _ in range(MAX_RETRY):
         try:
             res = client.moderations.create(input=text)
             flagged = res.results[0].flagged
-            for category, threshold in threshold_dict.items():
-                if getattr(res.results[0].category_scores, category) > threshold:
-                    flagged = True
+            if custom_thresholds is not None:
+                for category, threshold in custom_thresholds.items():
+                    if getattr(res.results[0].category_scores, category) > threshold:
+                        flagged = True
             break
         except (openai.OpenAIError, KeyError, IndexError) as e:
-            # flag true to be conservative
-            flagged = True
             print(f"MODERATION ERROR: {e}\nInput: {text}")
     return flagged
 
 
-def moderation_filter(text, model_list):
-    MODEL_KEYWORDS = ["claude", "gpt-4", "bard"]
+def moderation_filter(text, model_list, do_moderation=False):
+    # Apply moderation for below models
+    MODEL_KEYWORDS = ["claude", "gpt", "bard", "mistral-large", "command-r", "dbrx"]
+
+    custom_thresholds = {"sexual": 0.3}
+    # set a stricter threshold for claude
+    for model in model_list:
+        if "claude" in model:
+            custom_thresholds = {"sexual": 0.2}
 
     for keyword in MODEL_KEYWORDS:
         for model in model_list:
-            if keyword in model and oai_moderation(text):
-                return True
+            if keyword in model:
+                do_moderation = True
+                break
+
+    if do_moderation:
+        return oai_moderation(text, custom_thresholds)
     return False
 
 
@@ -235,7 +245,6 @@ function() {
 
     msg = "Users of this website are required to agree to the following terms:\\n\\nThe service is a research preview. It only provides limited safety measures and may generate offensive content. It must not be used for any illegal, harmful, violent, racist, or sexual purposes.\\nPlease do not upload any private information.\\nThe service collects user dialogue data, including both text and images, and reserves the right to distribute it under a Creative Commons Attribution (CC-BY) or a similar license."
     alert(msg);
-
     return url_params;
     }
 """
@@ -378,3 +387,116 @@ def load_image(image_file):
         image = Image.open(BytesIO(base64.b64decode(image_file)))
 
     return image
+
+
+def upload_image_file_to_gcs(image, filename):
+    from google.cloud import storage
+    import io
+
+    storage_client = storage.Client()
+    # upload file to GCS
+    bucket = storage_client.get_bucket("arena_user_content")
+
+    blob = bucket.blob(f"{filename}")
+    if not blob.exists():
+        buffer = io.BytesIO()
+        image.save(buffer, format="PNG")
+        buffer.seek(0)
+        blob.upload_from_file(buffer, content_type="image/png")
+
+    return blob.public_url
+
+
+def get_image_file_from_gcs(filename):
+    from google.cloud import storage
+
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket("arena_user_content")
+    blob = bucket.blob(f"{filename}")
+    contents = blob.download_as_bytes()
+
+    return contents
+
+
+def resize_image_and_return_image_in_bytes(image, max_image_size_mb):
+    from PIL import Image
+    import math
+
+    image_bytes = BytesIO()
+    if not max_image_size_mb is None:
+        image.save(image_bytes, format="PNG")
+        target_size_bytes = max_image_size_mb * 1024 * 1024
+        current_size_bytes = image_bytes.tell()
+
+        if current_size_bytes > target_size_bytes:
+            resize_factor = (target_size_bytes / current_size_bytes) ** 0.5
+            new_width = math.floor(image.width * resize_factor)
+            new_height = math.floor(image.height * resize_factor)
+            resized_image = image.resize((new_width, new_height))
+
+            image_bytes = BytesIO()
+            resized_image.save(image_bytes, format="PNG")
+
+        image_bytes.seek(0)
+    else:
+        image.save(image_bytes, format="PNG")
+
+    return image_bytes
+
+
+def convert_image_to_byte_array(image, max_image_size_mb):
+    from PIL import Image
+
+    if type(image) == str:
+        pil_image = Image.open(image).convert("RGB")
+        image_bytes = resize_image_and_return_image_in_bytes(
+            pil_image, max_image_size_mb
+        )
+    else:
+        image_bytes = resize_image_and_return_image_in_bytes(image, max_image_size_mb)
+
+    image_byte_array = image_bytes.getvalue()
+    return image_byte_array
+
+
+def image_moderation_request(image_bytes, endpoint, api_key):
+    headers = {"Content-Type": "image/jpeg", "Ocp-Apim-Subscription-Key": api_key}
+
+    MAX_RETRIES = 3
+    for _ in range(MAX_RETRIES):
+        response = requests.post(endpoint, headers=headers, data=image_bytes).json()
+        try:
+            if response["Status"]["Code"] == 3000:
+                break
+        except:
+            time.sleep(0.5)
+    return response
+
+
+def image_moderation_provider(image, api_type):
+    if api_type == "nsfw":
+        endpoint = os.environ["AZURE_IMG_MODERATION_ENDPOINT"]
+        api_key = os.environ["AZURE_IMG_MODERATION_API_KEY"]
+        response = image_moderation_request(image, endpoint, api_key)
+        return response["IsImageAdultClassified"]
+    elif api_type == "csam":
+        endpoint = (
+            "https://api.microsoftmoderator.com/photodna/v1.0/Match?enhance=false"
+        )
+        api_key = os.environ["PHOTODNA_API_KEY"]
+        response = image_moderation_request(image, endpoint, api_key)
+        return response["IsMatch"]
+
+
+def image_moderation_filter(image):
+    print(f"moderating image: {image}")
+    MAX_NSFW_ENDPOINT_IMAGE_SIZE_IN_MB = 4
+    image_bytes = convert_image_to_byte_array(image, MAX_NSFW_ENDPOINT_IMAGE_SIZE_IN_MB)
+
+    nsfw_flagged = image_moderation_provider(image_bytes, "nsfw")
+    csam_flagged = False
+
+    if nsfw_flagged:
+        csam_flagged = image_moderation_provider(image_bytes, "csam")
+
+    return nsfw_flagged, csam_flagged
