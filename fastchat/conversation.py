@@ -1524,6 +1524,19 @@ register_conv_template(
     )
 )
 
+register_conv_template(
+    Conversation(
+        name="llama-2-ro",
+        system_template="[INST] <<SYS>>\n{system_message}\n<</SYS>>\n\n",
+        roles=("[INST]", "[/INST]"),
+        system_message="Ești un asistent folositor, respectuos și onest. Încearcă să ajuți cât mai mult prin informațiile oferite, excluzând răspunsuri toxice, rasiste, sexiste, periculoase și ilegale.",
+        sep_style=SeparatorStyle.LLAMA2,
+        sep=" ",
+        sep2=" </s><s>",
+    )
+)
+
+
 # llama3 template
 # reference: https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct/blob/main/tokenizer_config.json
 # reference: https://github.com/meta-llama/llama3/blob/0cee08ec68f4cfc0c89fe4a9366d82679aaa2a66/llama/tokenizer.py#L222
@@ -1538,6 +1551,23 @@ register_conv_template(
         stop_token_ids=[128001, 128009],
     )
 )
+
+# llama3 template
+# reference: https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct/blob/main/tokenizer_config.json
+# reference: https://github.com/meta-llama/llama3/blob/0cee08ec68f4cfc0c89fe4a9366d82679aaa2a66/llama/tokenizer.py#L222
+register_conv_template(
+    Conversation(
+        name="llama-3-ro",
+        system_template="<|start_header_id|>system<|end_header_id|>\n\n{system_message}<|eot_id|>",
+        roles=("user", "assistant"),
+        system_message="Ești un asistent folositor, respectuos și onest. Încearcă să ajuți cât mai mult prin informațiile oferite, excluzând răspunsuri toxice, rasiste, sexiste, periculoase și ilegale.",
+        sep_style=SeparatorStyle.LLAMA3,
+        sep="",
+        stop_str="<|eot_id|>",
+        stop_token_ids=[128001, 128009],
+    )
+)
+
 
 register_conv_template(
     Conversation(

@@ -1560,6 +1560,23 @@ class Llama2Adapter(BaseModelAdapter):
     def get_default_conv_template(self, model_path: str) -> Conversation:
         return get_conv_template("llama-2")
 
+class RoLlama2Adapter(BaseModelAdapter):
+    """The model adapter for RoLlama-2 (e.g., OpenLLM-Ro/RoLlama2-7b-Instruct)"""
+
+    def match(self, model_path: str):
+        return "rollama-2" in model_path.lower() or "rollama2" in model_path.lower()
+    
+
+    def load_model(self, model_path: str, from_pretrained_kwargs: dict):
+        model, tokenizer = super().load_model(model_path, from_pretrained_kwargs)
+        model.config.eos_token_id = tokenizer.eos_token_id
+        model.config.pad_token_id = tokenizer.pad_token_id
+        return model, tokenizer
+
+    def get_default_conv_template(self, model_path: str) -> Conversation:
+        return get_conv_template("llama-2-ro")
+
+
 
 class Llama3Adapter(BaseModelAdapter):
     """The model adapter for Llama-3 (e.g., meta-llama/Meta-Llama-3-8B-Instruct)"""
@@ -1575,6 +1592,22 @@ class Llama3Adapter(BaseModelAdapter):
 
     def get_default_conv_template(self, model_path: str) -> Conversation:
         return get_conv_template("llama-3")
+
+
+class RoLlama3Adapter(BaseModelAdapter):
+    """The model adapter for Llama-3 (e.g., OpenLLM-Ro/RoLlama3-8b-Instruct)"""
+
+    def match(self, model_path: str):
+        return "rollama-3" in model_path.lower() or "rollama3" in model_path.lower()
+
+    def load_model(self, model_path: str, from_pretrained_kwargs: dict):
+        model, tokenizer = super().load_model(model_path, from_pretrained_kwargs)
+        model.config.eos_token_id = tokenizer.eos_token_id
+        model.config.pad_token_id = tokenizer.pad_token_id
+        return model, tokenizer
+
+    def get_default_conv_template(self, model_path: str) -> Conversation:
+        return get_conv_template("llama-3-ro")
 
 
 class CuteGPTAdapter(BaseModelAdapter):
@@ -2470,7 +2503,9 @@ register_model_adapter(XGenAdapter)
 register_model_adapter(PythiaAdapter)
 register_model_adapter(InternLMChatAdapter)
 register_model_adapter(StarChatAdapter)
+register_model_adapter(RoLlama2Adapter)
 register_model_adapter(Llama2Adapter)
+register_model_adapter(RoLlama3Adapter)
 register_model_adapter(Llama3Adapter)
 register_model_adapter(CuteGPTAdapter)
 register_model_adapter(OpenOrcaAdapter)
