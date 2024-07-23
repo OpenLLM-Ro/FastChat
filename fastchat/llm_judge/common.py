@@ -9,7 +9,7 @@ import json
 import os
 import re
 import time
-from typing import Optional
+from typing import Optional, List
 
 import openai
 import anthropic
@@ -189,6 +189,40 @@ def run_judge_single(question, answer, judge, ref_answer, multi_turn=False):
     return rating, user_prompt, judgment
 
 
+def prepare_run_judge_single_batched(question, answer, judge, ref_answer, multi_turn=False):
+    kwargs = {}
+    model = judge.model_name
+    if ref_answer is not None:
+        kwargs["ref_answer_1"] = ref_answer["choices"][0]["turns"][0]
+        if multi_turn:
+            kwargs["ref_answer_2"] = ref_answer["choices"][0]["turns"][1]
+
+    if multi_turn:
+        user_prompt = judge.prompt_template["prompt_template"].format(
+            question_1=question["turns"][0],
+            question_2=question["turns"][1],
+            answer_1=answer["choices"][0]["turns"][0],
+            answer_2=answer["choices"][0]["turns"][1],
+            **kwargs,
+        )
+    else:
+        user_prompt = judge.prompt_template["prompt_template"].format(
+            question=question["turns"][0],
+            answer=answer["choices"][0]["turns"][0],
+            **kwargs,
+        )
+
+    rating = -1
+
+    system_prompt = judge.prompt_template["system_prompt"]
+    conv = get_conversation_template(model)
+    conv.set_system_message(system_prompt)
+    conv.append_message(conv.roles[0], user_prompt)
+    conv.append_message(conv.roles[1], None)
+
+    return conv
+
+
 def play_a_match_single(match: MatchSingle, output_file: str):
     question, model, answer, judge, ref_answer, multi_turn = (
         match.question,
@@ -226,10 +260,175 @@ def play_a_match_single(match: MatchSingle, output_file: str):
 
     if output_file:
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
-        with open(output_file, "a") as fout:
+        with open(output_file, "a", encoding="utf-8") as fout:
             fout.write(json.dumps(result, ensure_ascii=False) + "\n")
 
     return result
+
+
+def create_batch_job(file_name):
+    client = openai.OpenAI()
+
+    batch_input_file = client.files.create(file=open(file_name, "rb"), purpose="batch")
+    batch_input_file_id = batch_input_file.id
+
+    out = client.batches.create(
+        input_file_id=batch_input_file_id,
+        endpoint="/v1/chat/completions",
+        completion_window="24h",
+        metadata={
+        "description": "batch run for llm-judge"
+        }
+    )
+    batch_id = out.id
+    print("BATCH ID:", batch_id)
+    while True:
+        status = client.batches.retrieve(batch_id).status
+        print(status)
+        if status == "completed":
+            out_file_id = client.batches.retrieve(batch_id).output_file_id
+            break
+        time.sleep(30)
+    return batch_id, out_file_id
+
+
+def process_batch_job(out_file_id, in_file_name):
+    inbatches = []
+    with open(in_file_name, "r", encoding="utf-8") as f:
+        inbatches = f.readlines()
+    
+    inbatches = list(map(lambda x: eval(x), inbatches))
+
+    client = openai.OpenAI()
+    file_response = client.files.content(out_file_id)
+
+    parts = file_response.text.split("\"error\": null}\n")
+    parts = list(filter(lambda x: len(x) > 0, parts))
+    final_entries = []
+    for p in parts:
+        p = p[:-1] + "}"
+        p = p.replace("null", "None")
+        p = eval(p)
+        custom_id = p["custom_id"]
+        inb = search_for_entry("custom_id", custom_id, inbatches)
+
+        one_score_pattern = re.compile("\[\[(\d+\.?\d*)\]\]")
+        one_score_pattern_backup = re.compile("\[(\d+\.?\d*)\]")
+        judgment = p["response"]["body"]["choices"][0]["message"]["content"]
+        match = re.search(one_score_pattern, judgment)
+        if not match:
+            match = re.search(one_score_pattern_backup, judgment)
+
+        if match:
+            rating = ast.literal_eval(match.groups()[0])
+        else:
+            rating = -1
+
+        entry = {}
+        entry["question_id"] = inb["body"]["question_id"]
+        entry["model"] = inb["body"]["own_model"]
+        entry["judge"] = inb["body"]["judge"]
+        entry["user_prompt"] = inb["body"]["messages"][1]["content"]
+
+        entry["judgment"] = judgment
+        entry["score"] = rating
+        if inb["body"]["multi_turn"] == "False":
+            entry["turn"] = 1
+        elif inb["body"]["multi_turn"] == "True":
+            entry["turn"] = 2
+        else:
+            print(inb["body"]["multi_turn"])
+
+        
+        final_entries.append(entry)
+
+    return final_entries
+
+
+def search_for_entry(k, v, l):
+    for e in l:
+        if e[k] == v:
+            return e
+
+
+def play_a_match_single_batched(matches: List[MatchSingle], output_file: str):
+    requests = []
+    gpt_requests = []
+    for match_index, match in enumerate(matches):
+        
+
+        question, model, answer, judge, ref_answer, multi_turn = (
+            match.question,
+            match.model,
+            match.answer,
+            match.judge,
+            match.ref_answer,
+            match.multi_turn,
+        )
+
+        if judge.prompt_template["type"] == "single":
+            conv = prepare_run_judge_single_batched(question, answer, judge, ref_answer, multi_turn=multi_turn)
+            messages = conv.to_openai_api_messages()
+            r = {}
+            r["custom_id"] = "req{0}".format(match_index)
+            r["method"] = "POST"
+            r["url"] = "/v1/chat/completions"
+            body = {}
+            body["model"] = judge.model_name
+            body["messages"] = messages
+            body["temperature"] = 0
+            body["max_tokens"] = 1024
+            body["question_id"] = question["question_id"]
+            body["own_model"] = model
+            body["judge"] = (judge.model_name, judge.prompt_template["name"])
+            body["multi_turn"] = str(multi_turn).capitalize()
+            r["body"] = body
+            requests.append(r)
+
+            r = {}
+            r["custom_id"] = "req{0}".format(match_index)
+            r["method"] = "POST"
+            r["url"] = "/v1/chat/completions"
+            body = {}
+            body["model"] = judge.model_name
+            body["messages"] = messages
+            body["temperature"] = 0
+            body["max_tokens"] = 1024
+            r["body"] = body
+            gpt_requests.append(r)
+
+
+            
+        else:
+            raise ValueError(f"invalid judge type: {judge['type']}")
+
+    # save batch file
+    in_batch_file = "batch_in.jsonl"
+    with open(in_batch_file, 'w', encoding="utf-8") as outfile:
+        for r in requests:
+            json.dump(r, outfile, ensure_ascii=False)
+            outfile.write('\n')
+
+    
+    in_judge_file = "judge_in.jsonl"
+    with open(in_judge_file, 'w', encoding="utf-8") as outfile:
+        for r in gpt_requests:
+            json.dump(r, outfile, ensure_ascii=False)
+            outfile.write('\n')
+    batch_id, outfile_id = create_batch_job(in_judge_file)
+    # outfile_id for rollama2 instruct
+    # outfile_id = "file-e840OEMaqjMkwwtr7hhao3LR"
+    # outfile_id for romistral instruct
+    # outfile_id = "file-e840OEMaqjMkwwtr7hhao3LR"
+    final_entries = process_batch_job(outfile_id, in_batch_file)
+    
+    if output_file:
+        os.makedirs(os.path.dirname(output_file), exist_ok=True)
+        with open(output_file, "a", encoding="utf-8") as fout:
+            for entry in final_entries:
+                fout.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+    return final_entries
 
 
 def run_judge_pair(question, answer_a, answer_b, judge, ref_answer, multi_turn=False):
@@ -594,7 +793,7 @@ def load_single_model_judgments(filename: str):
     """
     judge_dict = {}
 
-    for line in open(filename):
+    for line in open(filename, encoding="utf-8"):
         obj = json.loads(line)
         judge = tuple(obj["judge"])
         qid, model = obj["question_id"], obj["model"]

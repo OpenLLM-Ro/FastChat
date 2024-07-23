@@ -16,6 +16,7 @@ from fastchat.llm_judge.common import (
     check_data,
     play_a_match_pair,
     play_a_match_single,
+    play_a_match_single_batched,
     get_model_list,
     Judge,
     MatchPair,
@@ -207,6 +208,11 @@ if __name__ == "__main__":
     parser.add_argument(
         "--first-n", type=int, help="A debug option. Only run the first `n` judgments."
     )
+    parser.add_argument(
+        "--batch_requests", help="Whether to use OpenAI Batched API for saving costs", action="store_true"
+    )
+
+
     args = parser.parse_args()
 
     question_file = f"data/{args.bench_name}/question.jsonl"
@@ -233,7 +239,7 @@ if __name__ == "__main__":
 
     if args.mode == "single":
         judges = make_judge_single(args.judge_model, judge_prompts)
-        play_a_match_func = play_a_match_single
+        play_a_match_func = play_a_match_single_batched
         output_file = (
             f"data/{args.bench_name}/model_judgment/{args.judge_model}_single.jsonl"
         )
@@ -305,8 +311,11 @@ if __name__ == "__main__":
 
     # Play matches
     if args.parallel == 1:
-        for match in tqdm(matches):
-            play_a_match_func(match, output_file=output_file)
+        if args.batch_requests == True:
+            play_a_match_func(matches, output_file=output_file)
+        else:
+            for match in tqdm(matches):
+                play_a_match_func(match, output_file=output_file)
     else:
 
         def play_a_match_wrapper(match):
