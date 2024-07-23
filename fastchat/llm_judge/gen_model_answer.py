@@ -34,6 +34,12 @@ def run_eval(
     revision,
 ):
     questions = load_questions(question_file, question_begin, question_end)
+    if args.force_ro:
+        force_ro_questions = []
+        for q in questions:
+            q["turns"] = [x + " Te rog să redactezi răspunsul în limba română." for x in q["turns"]]
+            force_ro_questions.append(q)
+        questions = force_ro_questions
     # random shuffle the questions to balance the loading
     random.shuffle(questions)
 
@@ -271,6 +277,12 @@ if __name__ == "__main__":
         type=str,
         default="main",
         help="The model revision to load.",
+    )
+
+    parser.add_argument(
+        "--force_ro",
+        help="Whether to ask the model to answer in Romanian in each individual question",
+        action="store_true"
     )
 
     args = parser.parse_args()
