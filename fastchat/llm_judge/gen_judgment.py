@@ -239,7 +239,10 @@ if __name__ == "__main__":
 
     if args.mode == "single":
         judges = make_judge_single(args.judge_model, judge_prompts)
-        play_a_match_func = play_a_match_single_batched
+        if args.batch_requests == False:
+            play_a_match_func = play_a_match_single
+        else:
+            play_a_match_func = play_a_match_single_batched
         output_file = (
             f"data/{args.bench_name}/model_judgment/{args.judge_model}_single.jsonl"
         )
