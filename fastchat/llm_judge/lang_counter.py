@@ -103,8 +103,6 @@ if __name__ == "__main__":
         data = read_jsonl(os.path.join(JUDGMENTS_PATH, jf))
         judgments[jf] = data
 
-
-
     with open(OUTFILE, "w", encoding="utf-8") as logfile:
         for model in args.model_list:
             data = read_jsonl(os.path.join(ANSWERS_PATH, model+".jsonl"))

@@ -20,7 +20,7 @@ def display_result_single(args):
     df = df[df["score"] != -1]
 
     if args.model_list is not None:
-        if len(args.model_list) ==1 and args.model_list[0].startswith("*"):
+        if len(args.model_list) == 1 and args.model_list[0].startswith("*"):
             if "llama" in args.model_list[0] and "-" not in args.model_list[0]:
                 r = "(^.*{0}.*$)|(^.*{1}.*$)".format(args.model_list[0][1:], args.model_list[0][1:][:-1] + "-" + args.model_list[0][1:][-1])
                 df = df[df['model'].str.contains(r, flags=re.IGNORECASE,regex=True)]
