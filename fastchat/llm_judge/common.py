@@ -28,7 +28,12 @@ API_ERROR_OUTPUT = "$ERROR$"
 TIE_DELTA = 0.1
 
 # Categories that need reference answers
-NEED_REF_CATS = ["math", "reasoning", "coding", "arena-hard-200"]
+NEED_REF_CATS = [
+                #mt_bench
+                "math", "reasoning", "coding", "arena-hard-200",
+                #ro_cultura_bench
+                "Scris", "Roluri", "Argumentare", "Geografie/turism", "Istorie", "Cultură și știință", "Sport", "Obiceiuri românești", "Stereotipuri (ale românilor/despre români)", "Români celebri"
+                 ]
 
 # Extract scores from judgments
 two_score_pattern = re.compile("\[\[(\d+\.?\d*),\s?(\d+\.?\d*)\]\]")
@@ -38,6 +43,7 @@ one_score_pattern_backup = re.compile("\[(\d+\.?\d*)\]")
 
 # Sampling temperature configs for
 temperature_config = {
+    # mt_bench
     "writing": 0.7,
     "roleplay": 0.7,
     "extraction": 0.0,
@@ -47,6 +53,18 @@ temperature_config = {
     "stem": 0.1,
     "humanities": 0.1,
     "arena-hard-200": 0.0,
+
+    #ro_cultura_bench
+    'Scris': 0.7,
+    'Roluri': 0.7,
+    'Argumentare': 0.0,
+    'Geografie/turism': 0.1,
+    'Istorie': 0.1,
+    'Cultură și știință': 0.1,
+    'Sport': 0.1,
+    'Obiceiuri românești': 0.1,
+    'Stereotipuri (ale românilor/despre români)': 0.1,
+    'Români celebri': 0.1,
 }
 
 reverse_model_map = {
@@ -416,10 +434,6 @@ def play_a_match_single_batched(matches: List[MatchSingle], output_file: str):
             json.dump(r, outfile, ensure_ascii=False)
             outfile.write('\n')
     batch_id, outfile_id = create_batch_job(in_judge_file)
-    # outfile_id for rollama2 instruct
-    # outfile_id = "file-e840OEMaqjMkwwtr7hhao3LR"
-    # outfile_id for romistral instruct
-    # outfile_id = "file-e840OEMaqjMkwwtr7hhao3LR"
     final_entries = process_batch_job(outfile_id, in_batch_file)
     
     if output_file:
@@ -428,6 +442,8 @@ def play_a_match_single_batched(matches: List[MatchSingle], output_file: str):
             for entry in final_entries:
                 fout.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
+
+    # maybe detele in_batch_file?
     return final_entries
 
 
