@@ -4,7 +4,7 @@ python3 show_result.py --mode [single|pairwise-baseline|pairwise-all]
 """
 import argparse
 import pandas as pd
-
+import re
 
 def display_result_single(args):
     if args.input_file is None:
@@ -20,7 +20,14 @@ def display_result_single(args):
     df = df[df["score"] != -1]
 
     if args.model_list is not None:
-        df = df[df["model"].isin(args.model_list)]
+        if len(args.model_list) ==1 and args.model_list[0].startswith("*"):
+            if "llama" in args.model_list[0] and "-" not in args.model_list[0]:
+                r = "(^.*{0}.*$)|(^.*{1}.*$)".format(args.model_list[0][1:], args.model_list[0][1:][:-1] + "-" + args.model_list[0][1:][-1])
+                df = df[df['model'].str.contains(r, flags=re.IGNORECASE,regex=True)]
+            else:
+                df = df[df['model'].str.contains(args.model_list[0][1:], flags=re.IGNORECASE)]
+        else:
+            df = df[df["model"].isin(args.model_list)]
 
     print("\n########## First turn ##########")
     df_1 = df[df["turn"] == 1].groupby(["model", "turn"]).mean()
