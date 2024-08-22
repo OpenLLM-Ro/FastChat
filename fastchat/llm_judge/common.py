@@ -433,6 +433,7 @@ def play_a_match_single_batched(matches: List[MatchSingle], output_file: str):
         for r in gpt_requests:
             json.dump(r, outfile, ensure_ascii=False)
             outfile.write('\n')
+
     batch_id, outfile_id = create_batch_job(in_judge_file)
     final_entries = process_batch_job(outfile_id, in_batch_file)
     
@@ -444,6 +445,8 @@ def play_a_match_single_batched(matches: List[MatchSingle], output_file: str):
 
 
     # maybe detele in_batch_file?
+    os.remove("batch_in.jsonl")
+    os.remove("judge_in.jsonl")
     return final_entries
 
 
