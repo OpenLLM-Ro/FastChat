@@ -95,8 +95,6 @@ if __name__ == "__main__":
     if args.model_list[0] == "all":
         args.model_list = os.listdir(ANSWERS_PATH)
         args.model_list = list(map(lambda x: x[:-6], args.model_list))
-    args.model_list = args.model_list[:2]
-
 
     judgments = {}
     for jf in os.listdir(JUDGMENTS_PATH):
