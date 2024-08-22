@@ -16,16 +16,17 @@ CATEGORIES_SB = ["Writing", "Role", "Argumentation", "Geography", "History", "Cu
 MODEL_JUDGMENT_PATH = "data/mt_bench_ro/model_judgment/gpt-4o-2024-05-13_single.jsonl"
 
 
-def get_model_df(dataset_name):
-    if "mt_bench" in dataset_name:
+def get_model_df(input_file):
+    bench_name = input_file.split("data\\")[1].split("\\model_judgment")[0]
+    if "mt_bench" in bench_name:
         x = 81
         categs = CATEGORIES_MT
-    elif dataset_name == "":
+    elif bench_name == "cultura_bench_ro":
         x = 0
         categs = CATEGORIES_SB
         
     q2result = []
-    fin = open(MODEL_JUDGMENT_PATH, "r", encoding="utf-8")
+    fin = open(input_file, "r", encoding="utf-8")
     for line in fin:
         obj = json.loads(line)
         obj["category"] = categs[(obj["question_id"]-x)//10]
@@ -38,7 +39,7 @@ def get_model_df(dataset_name):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--bench-name", type=str, default="mt_bench_ro")
+    parser.add_argument("--input-file", type=str)
     parser.add_argument(
         "--model-list",
         type=str,
@@ -48,9 +49,14 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    bench_name = args.input_file.split("data\\")[1].split("\\model_judgment")[0]
+    if "mt_bench" in bench_name:
+        categs = CATEGORIES_MT
+    elif bench_name == "cultura_bench_ro":
+        categs = CATEGORIES_SB
 
-    df = get_model_df(args.bench_name)
 
+    df = get_model_df(args.input_file)
     all_models = df["model"].unique()
 
     if args.model_list is not None:
@@ -64,14 +70,14 @@ if __name__ == "__main__":
             df = df[df["model"].isin(args.model_list)]
     else:
         models = all_models
-    
+
     scores_all = []
     scores_ft = []
     scores_st = []
     for model in models:
         full_scores = []
 
-        for cat in CATEGORIES_MT:            
+        for cat in categs:            
             res = df[(df["category"]==cat) & (df["model"]==model) & (df["score"] >= 0)]
             score = res["score"].mean()
             full_scores.extend(list(res["score"]))
@@ -93,17 +99,23 @@ if __name__ == "__main__":
             json.dump(entry, file, ensure_ascii=False)
             file.write('\n')
 
-    with open(os.path.join(save_path, "per_categ_first_turn"), 'w') as file:
-        for entry in scores_ft:
-            json.dump(entry, file, ensure_ascii=False)
-            file.write('\n')
+    if categs != CATEGORIES_SB:
+        with open(os.path.join(save_path, "per_categ_first_turn"), 'w') as file:
+            for entry in scores_ft:
+                json.dump(entry, file, ensure_ascii=False)
+                file.write('\n')
 
-    with open(os.path.join(save_path, "per_categ_second_turn"), 'w') as file:
-        for entry in scores_st:
-            json.dump(entry, file, ensure_ascii=False)
-            file.write('\n')
+        with open(os.path.join(save_path, "per_categ_second_turn"), 'w') as file:
+            for entry in scores_st:
+                json.dump(entry, file, ensure_ascii=False)
+                file.write('\n')
 
-    for index, scores_to_consider in enumerate([scores_all, scores_ft, scores_st]):
+        scs = [scores_all, scores_ft, scores_st]
+    else:
+        scs = [scores_all]
+
+
+    for index, scores_to_consider in enumerate(scs):
         if index == 0:
             name = "Global"
         elif index == 1:
@@ -116,7 +128,7 @@ if __name__ == "__main__":
         scores_target = sorted(scores_target, key=lambda x: target_models.index(x["model"]), reverse=True)
         df_score = pd.DataFrame(scores_target)
         df_score = df_score[df_score["model"].isin(target_models)]
-        fig = px.line_polar(df_score, r = 'score', theta = 'category', line_close = True, category_orders = {"category": CATEGORIES_MT},
+        fig = px.line_polar(df_score, r = 'score', theta = 'category', line_close = True, category_orders = {"category": categs},
                             color = 'model', markers=True, color_discrete_sequence=px.colors.qualitative.Pastel)
         fig['layout']['title'] = name
         fig.show()
