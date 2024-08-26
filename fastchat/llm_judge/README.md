@@ -1,4 +1,4 @@
-Official code used for evaluating Romanian LLMs as proposed in [Masala et al. 2024](https://arxiv.org/abs/2406.18266). This repo is a fork of the popular [FastChat](https://github.com/lm-sys/FastChat)) repo used for LLM-as-a-Judge evaluation. 
+Official code used for evaluating Romanian LLMs as proposed in [Masala et al. 2024](https://arxiv.org/abs/2406.18266). This repo is a fork of the popular [FastChat](https://github.com/lm-sys/FastChat) repo used for LLM-as-a-Judge evaluation. 
 
 In this package, you can use (Ro)MTBench and RoCulturaBench questions and prompts to evaluate your models with LLM-as-a-judge.
 (Ro)MTBench is a set of challenging multi-turn open-ended questions for evaluating chat assistants, while RoCulturaBench evaluates how grounded an LLM is in Romanian culture.
