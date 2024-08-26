@@ -9,8 +9,6 @@ To automate the evaluation process, we prompt strong LLMs like GPT-4 to act as j
 - [Install](#install)
 - [Review Pre-Generated Model Answers and Judgments](#review-pre-generated-model-answers-and-judgments)
 - [Evaluate](#evaluate)
-- [Agreement Computation](#agreement-computation)
-- [Datasets](#datasets)
 - [Citation](#citation)
 
 ## Install
@@ -92,7 +90,7 @@ You can use this [colab notebook](https://colab.research.google.com/drive/15O3Y8
 
 
 
-## Cite as
+## Citation
 
 ```bibtex
 @misc{masala2024vorbecstiromanecsterecipetrain,
