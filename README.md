@@ -14,7 +14,7 @@ Models answers and judgments will be uploaded soon.
 ## Evaluation
 For evaluating LLMs using (Ro)MTBench and RoCulturaX please see [fastchat/llm_judge](fastchat/llm_judge).
 
-## Cite as
+## Citation
 
 ```bibtex
 @misc{masala2024vorbecstiromanecsterecipetrain,
