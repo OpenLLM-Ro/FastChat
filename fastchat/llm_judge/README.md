@@ -67,29 +67,31 @@ e.g.,
 ```
 python gen_judgment.py --bench-name="cultura_bench_ro" --judge-file="data/judge_prompts_ro.jsonl" --batch_requests --model-list RoLlama2-7b-Instruct
 ```
-We stronly recommend to use the `--batch_requests` flags as it uses OpenAI Batch API and is cheaper. The judgments will be saved to `data/[BENCHMARK]/model_judgment/[JUDGE-MODEL].jsonl`. We recommend the newest GPT-4o model as judge: gpt-4o-2024-08-06. 
+We stronly recommend to use the `--batch_requests` flags as it uses OpenAI Batch API and is cheaper. The judgments will be saved to `data/[BENCHMARK]/model_judgment/[JUDGE-MODEL]_single.jsonl`. We recommend the newest GPT-4o model as judge: gpt-4o-2024-08-06. 
 
-### Step 3. Show MT-bench scores
+### Step 3. Show benchmark scores
+
+- Show all scores
+  ```
+  python .\show_result.py --input-file .\data\{BENCHMARK}\model_judgment\[JUDGE-MODEL]_single.jsonl
+  ```
 
 - Show the scores for selected models
   ```
-  python show_result.py --model-list vicuna-13b-v1.3 alpaca-13b llama-13b claude-v1 gpt-3.5-turbo gpt-4
-  ```
-- Show all scores
-  ```
-  python show_result.py
+  python show_result.py --input-file .\data\{BENCHMARK}\model_judgment\[JUDGE-MODEL]_single.jsonl --model-list RoLlama2-7b-Instruct
   ```
 
----
+- Show the scores for a category of models
+  ```
+  python show_result.py --input-file .\data\{BENCHMARK}\model_judgment\[JUDGE-MODEL]_single.jsonl --model-list *llama2
+  ```
 
-### How to plot the radar figure?
+- Compute detailed results (e.g. radar, results per category)
+  ```
+  python .\gen_detailed_scores.py  --input-file .\data\{BENCHMARK}\model_judgment\[JUDGE-MODEL]_single.jsonl--model-list *llama2
+  ```
 
-You can use this [colab notebook](https://colab.research.google.com/drive/15O3Y8Rxq37PuMlArE291P4OC6ia37PQK#scrollTo=5i8R0l-XqkgO) to plot the radar figure for MT-bench.
-
-<img src="data/mt_bench/misc/radar.png" width="600" height="450">
-
-
-
+  
 ## Citation
 
 ```bibtex
