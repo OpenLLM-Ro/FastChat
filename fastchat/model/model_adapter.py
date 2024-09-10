@@ -1615,7 +1615,7 @@ class PansophicLlama31Adapter(BaseModelAdapter):
     """The model adapter for pansophic llama3.1 model"""
 
     def match(self, model_path: str):
-        return "pansophic-1-preview-LLaMA3.1-8b" in model_path.lower()
+        return "pansophic-1-preview-LLaMA3.1-8b" in model_path
 
     def load_model(self, model_path: str, from_pretrained_kwargs: dict):
         model, tokenizer = super().load_model(model_path, from_pretrained_kwargs)
@@ -2523,8 +2523,8 @@ register_model_adapter(StarChatAdapter)
 register_model_adapter(RoLlama2Adapter)
 register_model_adapter(Llama2Adapter)
 register_model_adapter(RoLlama3Adapter)
-register_model_adapter(Llama3Adapter)
 register_model_adapter(PansophicLlama31Adapter)
+register_model_adapter(Llama3Adapter)
 register_model_adapter(CuteGPTAdapter)
 register_model_adapter(OpenOrcaAdapter)
 register_model_adapter(DolphinAdapter)
