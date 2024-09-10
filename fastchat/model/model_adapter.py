@@ -1611,6 +1611,22 @@ class RoLlama3Adapter(BaseModelAdapter):
         return get_conv_template("llama-3-ro")
 
 
+class PansophicLlama31Adapter(BaseModelAdapter):
+    """The model adapter for pansophic llama3.1 model"""
+
+    def match(self, model_path: str):
+        return "pansophic-1-preview-LLaMA3.1-8b" in model_path.lower()
+
+    def load_model(self, model_path: str, from_pretrained_kwargs: dict):
+        model, tokenizer = super().load_model(model_path, from_pretrained_kwargs)
+        model.config.eos_token_id = tokenizer.eos_token_id
+        model.config.pad_token_id = tokenizer.pad_token_id
+        return model, tokenizer
+
+    def get_default_conv_template(self, model_path: str) -> Conversation:
+        return get_conv_template("pansophic-llama3.1")
+
+
 class CuteGPTAdapter(BaseModelAdapter):
     """The model adapter for CuteGPT"""
 
@@ -2508,6 +2524,7 @@ register_model_adapter(RoLlama2Adapter)
 register_model_adapter(Llama2Adapter)
 register_model_adapter(RoLlama3Adapter)
 register_model_adapter(Llama3Adapter)
+register_model_adapter(PansophicLlama31Adapter)
 register_model_adapter(CuteGPTAdapter)
 register_model_adapter(OpenOrcaAdapter)
 register_model_adapter(DolphinAdapter)

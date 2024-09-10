@@ -1628,6 +1628,18 @@ register_conv_template(
     )
 )
 
+# pansophic/pansophic-1-preview-LLaMA3.1-8b
+# source: https://huggingface.co/pansophic/pansophic-1-preview-LLaMA3.1-8b
+register_conv_template(
+    Conversation(
+        name="pansophic-llama3.1",
+        roles=("<|im_start|>user", "<|im_start|>assistant"),
+        sep_style=SeparatorStyle.CHATML,
+        sep="<|im_end|>",
+        stop_token_ids=[128001, 128009],
+    )
+)
+
 
 # ehartford/dolphin-2.2.1-mistral-7b template
 # reference: https://huggingface.co/ehartford/dolphin-2.2.1-mistral-7b#training
