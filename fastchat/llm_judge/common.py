@@ -285,7 +285,7 @@ def play_a_match_single(match: MatchSingle, output_file: str):
 
 
 def create_batch_job(file_name):
-    client = openai.OpenAI()
+    client = openai.OpenAI(api_key = os.environ.get("OPENAI_API_KEY"))
 
     batch_input_file = client.files.create(file=open(file_name, "rb"), purpose="batch")
     batch_input_file_id = batch_input_file.id
@@ -317,7 +317,7 @@ def process_batch_job(out_file_id, in_file_name):
     
     inbatches = list(map(lambda x: eval(x), inbatches))
 
-    client = openai.OpenAI()
+    client = openai.OpenAI(api_key = os.environ.get("OPENAI_API_KEY"))
     file_response = client.files.content(out_file_id)
 
     parts = file_response.text.split("\"error\": null}\n")
@@ -919,7 +919,7 @@ def check_data(questions, model_answers, ref_answers, models, judges):
             if q["category"] not in NEED_REF_CATS:
                 continue
             assert (
-                q["question_id"] in ref_answers[jg.model_name]
+                q["question_id"] in ref_answers["refs"]
             ), f"Missing reference answer to Question {q['question_id']} for judge {jg.model_name}"
 
 
