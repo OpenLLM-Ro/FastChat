@@ -1,6 +1,6 @@
 # Evaluation of RoLLMs
 
-Official code used for evaluating Romanian LLMs as proposed in [Masala et al. 2024](https://arxiv.org/abs/2406.18266). This repo is a fork of the popular [FastChat](https://github.com/lm-sys/FastChat)) repo used for LLM-as-a-Judge evaluation. On top of the existing framework we add a suite of Romanian benchmarks:
+Official code used for evaluating Romanian LLMs as proposed in [Masala et al. 2024](https://arxiv.org/abs/2406.18266). This repo is a fork of the popular [FastChat](https://github.com/lm-sys/FastChat) repo used for LLM-as-a-Judge evaluation. On top of the existing framework we add a suite of Romanian benchmarks:
 
 - RoMTBench - the manually translated version of MTBench in Romanian
 - RoCulturaBench - a novel professionaly designed and built dataset for evaluating Romanian cultural knowledge of LLMs
