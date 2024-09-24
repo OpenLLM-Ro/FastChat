@@ -135,7 +135,7 @@ if __name__ == "__main__":
                                 print("More than one judgment for model {0}, question {1}, turn {2}.".format(model, item["question_id"], turn_index+1))
                                 sys.exit()
                             if len(judgment) == 0:
-                                logfile.write("Model {0} has not been judged by {1}.".format(model, k))
+                                logfile.write("Model {0} has not been judged by {1}.\n".format(model, k))
                                 continue
                             score = judgment[0]["score"]
                             if score == 0 and args.show_all == False:
